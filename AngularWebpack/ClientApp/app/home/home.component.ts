@@ -8,6 +8,6 @@ export class HomeComponent {
     appName: string = "My App";
     public count: number = 0;
     public counter(amount: number) {
-        this.count = this.count + amount;
+        this.count += amount;
     }
 }

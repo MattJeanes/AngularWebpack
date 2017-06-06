@@ -1,9 +1,13 @@
-/// <binding BeforeBuild='full' />
+/// <binding BeforeBuild='build' />
 'use strict';
 
-var gulp = require('gulp');
-var run = require('gulp-run');
-var runSequence = require('run-sequence');
+const gulp = require('gulp');
+const run = require('gulp-run');
+const runSequence = require('run-sequence');
+const del = require('del');
+const path = require('path');
+
+const outputDir = './wwwroot/dist';
 
 function getEnvOptions() {
     var options = [];
@@ -24,12 +28,12 @@ gulp.task('vendor', function () {
     return run('webpack --config webpack.config.vendor.js' + getEnvOptions()).exec();
 });
 
-gulp.task('build', function () {
+gulp.task('main', function () {
     return run('webpack --config webpack.config.js' + getEnvOptions()).exec();
 });
 
 gulp.task('test_compile', function () {
-    return run('webpack boot-tests=./ClientApp/test/boot-tests.ts').exec();
+    return run('webpack boot-tests=./ClientApp/test/boot-tests.ts' + getEnvOptions()).exec();
 });
 
 gulp.task('test_run', function () {
@@ -44,7 +48,12 @@ gulp.task('analyse_var', function () {
     global.analyse = true;
 })
 
+gulp.task('clean', function() {
+  del.sync(outputDir, { force: true });
+});
+
 gulp.task('test', callback => runSequence('test_compile', 'test_run'));
-gulp.task('full', callback => runSequence('vendor', 'build', callback));
-gulp.task('analyse', callback => runSequence('analyse_var', 'full'));
-gulp.task('publish', callback => runSequence('prod_var', 'full'));
+gulp.task('build', callback => runSequence('vendor', 'main', callback));
+gulp.task('analyse', callback => runSequence('analyse_var', 'build'));
+gulp.task('full', callback => runSequence('clean', 'build'));
+gulp.task('publish', callback => runSequence('prod_var', 'build'));

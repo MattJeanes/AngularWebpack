@@ -4,24 +4,24 @@ const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-module.exports = (env) => {
-    // Configuration in common to both client-side and server-side bundles
+module.exports = function (env) {
     const extractCSS = new ExtractTextPlugin('main.css');
     const prod = env && env.prod;
-    console.log(prod ? "Production build" : "Dev build")
+    console.log(prod ? 'Production' : 'Dev' + ' main build');
     const analyse = env && env.analyse;
-    if (analyse) console.log("Analysing build");
+    if (analyse) { console.log("Analysing build") };
     const cssLoader = prod ? 'css-loader?minimize' : 'css-loader';
-    const clientBundleOutputDir = './wwwroot/dist';
+    const outputDir = './wwwroot/dist';
     const bundleConfig = {
         entry: { 'main': './ClientApp/main.ts', 'styles': './Styles/main.scss' },
         stats: { modules: false },
         context: __dirname,
-        resolve: { extensions: ['.js', '.ts'] },
+        resolve: { extensions: ['.ts', '.js'] },
+        devtool: prod ? 'source-map' : 'eval-source-map',
         output: {
             filename: '[name].js',
-            publicPath: '/dist/', // Webpack dev middleware, if enabled, handles requests for this URL prefix
-            path: path.join(__dirname, clientBundleOutputDir)
+            publicPath: '/dist/',
+            path: path.join(__dirname, outputDir)
         },
         module: {
             rules: [
@@ -38,17 +38,13 @@ module.exports = (env) => {
             extractCSS,
             new webpack.DllReferencePlugin({
                 context: __dirname,
-                manifest: require('./wwwroot/dist/vendor-manifest.json')
+                manifest: require(path.join(__dirname, outputDir, 'vendor-manifest.json'))
             })
         ].concat(prod ? [
             // Plugins that apply in production builds only
             new webpack.optimize.UglifyJsPlugin()
         ] : [
             // Plugins that apply in development builds only
-            new webpack.SourceMapDevToolPlugin({
-                filename: '[file].map', // Remove this line if you prefer inline source maps
-                moduleFilenameTemplate: path.relative(clientBundleOutputDir, '[resourcePath]') // Point sourcemap entries to the original file locations on disk
-            })
         ]).concat(analyse ? [
             new BundleAnalyzerPlugin({
                 analyzerMode: 'static',
