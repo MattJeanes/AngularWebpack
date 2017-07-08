@@ -1,17 +1,28 @@
-import './polyfills';
+// Main
 
-import { enableProdMode } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { AppModule } from './app/app.module';
+import * as Pace from "pace-progress";
 
-if (module['hot']) {
-    module['hot'].accept();
-    module['hot'].dispose(() => {
+Pace.start();
+
+import "./styles/main.scss";
+
+import "./polyfills";
+
+import { enableProdMode } from "@angular/core";
+import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
+import { AppModule } from "./app/app.module";
+
+declare var module: any;
+
+if (module.hot) {
+    module.hot.accept();
+    module.hot.dispose(() => {
         // Before restarting the app, we create a new root element and dispose the old one
-        const oldRootElem = document.querySelector('app');
-        const newRootElem = document.createElement('app');
+        const oldRootElem = document.querySelector("app");
+        const newRootElem = document.createElement("app");
         if (oldRootElem && oldRootElem.parentNode) {
             oldRootElem.parentNode.insertBefore(newRootElem, oldRootElem);
+            oldRootElem.parentNode.removeChild(oldRootElem);
         }
         modulePromise.then(appModule => appModule.destroy());
     });

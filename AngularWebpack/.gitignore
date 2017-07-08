@@ -183,10 +183,6 @@ ClientBin/
 *.publishsettings
 orleans.codegen.cs
 
-/node_modules
-
-/yarn.lock
-
 # RIA/Silverlight projects
 Generated_Code/
 
@@ -235,3 +231,6 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+
+webpack.config.js
+webpack.vendor.config.js

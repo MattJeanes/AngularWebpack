@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-    templateUrl: './test.template.html'
+    templateUrl: "./test.template.html",
 })
 export class TestComponent {
-    test: string = "Test Page";
+    public test: string = "Test Page";
 }

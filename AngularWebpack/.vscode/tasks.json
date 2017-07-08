@@ -1,0 +1,37 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "0.1.0",
+    "tasks": [
+        {
+            "taskName": "build",
+            "command": "npm",
+            "isShellCommand": true,
+            "args": ["run-script", "build"],
+            "isBuildCommand": true,
+            "problemMatcher": "$tsc"
+        },
+        {
+            "taskName": "test",
+            "command": "npm",
+            "isShellCommand": true,
+            "args": ["run-script", "test"],
+            "isBuildCommand": true,
+            "problemMatcher": "$tsc"
+        },
+        {
+            "taskName": "publish",
+            "command": "npm",
+            "isShellCommand": true,
+            "args": ["run-script", "publish"],
+            "isBuildCommand": true,
+            "problemMatcher": "$tsc"
+        },
+        {
+            "taskName": "yarn install",
+            "command": "yarn",
+            "isShellCommand": true,
+            "args": ["install"]
+        }
+    ]
+}

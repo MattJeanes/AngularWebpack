@@ -11,12 +11,9 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.0" />
   </ItemGroup>
   <ItemGroup>
-    <!-- Files not to show in IDE -->
-    <Content Remove="package-lock.json" />
-    <Compile Remove="wwwroot\dist\**" />
-
-    <!-- Files not to publish (note that the 'dist' subfolders are re-added below) -->
     <Content Remove="ClientApp\**" />
+    
+    <Compile Remove="wwwroot\dist\**" />
     <Content Remove="wwwroot\dist\**" />
     <EmbeddedResource Remove="wwwroot\dist\**" />
     <None Remove="wwwroot\dist\**" />
