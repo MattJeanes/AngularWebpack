@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "build": "tsc && gulp vendor",
+    "vendor": "tsc && gulp vendor",
     "test": "gulp test",
     "lint": "tslint ClientApp/**/*.ts",
     "publish": "tsc && gulp publish"

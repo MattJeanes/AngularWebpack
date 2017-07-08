@@ -233,4 +233,4 @@ _Pvt_Extensions
 .fake/
 
 webpack.config.js
-webpack.vendor.config.js
+webpack.config.vendor.js

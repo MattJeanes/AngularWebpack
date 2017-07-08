@@ -5,11 +5,11 @@
     "tasks": [
         {
             "taskName": "build",
-            "command": "npm",
+            "command": "dotnet",
             "isShellCommand": true,
-            "args": ["run-script", "build"],
+            "args": ["build"],
             "isBuildCommand": true,
-            "problemMatcher": "$tsc"
+            "problemMatcher": "$msCompile"
         },
         {
             "taskName": "test",
@@ -20,15 +20,7 @@
             "problemMatcher": "$tsc"
         },
         {
-            "taskName": "publish",
-            "command": "npm",
-            "isShellCommand": true,
-            "args": ["run-script", "publish"],
-            "isBuildCommand": true,
-            "problemMatcher": "$tsc"
-        },
-        {
-            "taskName": "yarn install",
+            "taskName": "install",
             "command": "yarn",
             "isShellCommand": true,
             "args": ["install"]
