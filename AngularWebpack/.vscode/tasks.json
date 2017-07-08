@@ -20,10 +20,10 @@
             "problemMatcher": "$tsc"
         },
         {
-            "taskName": "install",
-            "command": "yarn",
+            "taskName": "restore",
+            "command": "npm",
             "isShellCommand": true,
-            "args": ["install"]
+            "args": ["run-script", "restore"]
         }
     ]
 }

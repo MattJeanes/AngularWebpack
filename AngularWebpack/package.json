@@ -6,7 +6,8 @@
     "vendor": "tsc && gulp vendor",
     "test": "gulp test",
     "lint": "tslint ClientApp/**/*.ts",
-    "publish": "tsc && gulp publish"
+    "publish": "tsc && gulp publish",
+    "restore": "dotnet restore && yarn install"
   },
   "dependencies": {
     "@angular/animations": "4.2.5",
